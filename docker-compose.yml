@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VNC_PASS=${VNC_PASS}
+    init: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "3m"
+        max-file: "3"
+    # restart: always
+    ports:
+      - 5901:5900
+    volumes:
+      - ./app:/app
+
+    shm_size: '3g'
